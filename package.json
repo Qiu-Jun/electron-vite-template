@@ -1,0 +1,84 @@
+{
+    "name": "electron-vite-template",
+    "version": "1.0.0",
+    "description": "electron-vite-template for June",
+    "main": "dist-electron/index.js",
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc && vite build",
+        "serve": "concurrently \"npm run dev\" \"npm run start\" ",
+        "start": "nodemon --exec electron . --watch ./ --ext .js,.html,.scss,.vue,.ts,.css",
+        "electron:build": "rimraf dist && vite build && electron-builder"
+    },
+    "build": {
+        "appId": "com.June.app",
+        "productName": "June",
+        "files": [
+            "./**/*"
+        ],
+        "directories": {
+            "output": "release/${version}"
+        },
+        "mac": {
+            "icon": "./public/icon.ico",
+            "artifactName": "${productName}_${version}.${ext}",
+            "target": [
+                "dmg"
+            ]
+        },
+        "win": {
+            "icon": "./public/icon.ico",
+            "artifactName": "${productName}_${version}.${ext}",
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64"
+                    ]
+                }
+            ]
+        },
+        "nsis": {
+            "oneClick": false,
+            "allowElevation": true,
+            "allowToChangeInstallationDirectory": true,
+            "createDesktopShortcut": true,
+            "createStartMenuShortcut": true,
+            "runAfterFinish": true,
+            "installerIcon": "./public/icon.ico",
+            "uninstallerIcon": "./public/icon.ico",
+            "installerHeaderIcon": "./public/icon.ico",
+            "shortcutName": "June"
+        }
+    },
+    "keywords": [
+        "electron",
+        "vite",
+        "vue3"
+    ],
+    "author": "June",
+    "license": "MIT",
+    "dependencies": {
+        "pinia": "^2.0.33",
+        "vue": "^3.2.47",
+        "vue-router": "^4.1.6"
+    },
+    "devDependencies": {
+        "@types/node": "^18.15.0",
+        "@vitejs/plugin-vue": "^4.0.0",
+        "concurrently": "^7.6.0",
+        "electron": "^23.1.3",
+        "electron-builder": "^23.6.0",
+        "electron-devtools-installer": "^3.2.0",
+        "nodemon": "^2.0.21",
+        "rimraf": "^4.4.0",
+        "sass": "^1.58.3",
+        "sass-loader": "^13.2.0",
+        "typescript": "^4.9.5",
+        "vite": "^4.1.4",
+        "vite-plugin-electron": "^0.11.1",
+        "vite-plugin-electron-renderer": "^0.12.1",
+        "vite-plugin-html": "^3.2.0",
+        "vue-tsc": "^1.2.0"
+    }
+}
