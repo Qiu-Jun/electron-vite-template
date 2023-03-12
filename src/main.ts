@@ -3,11 +3,11 @@
  * @Description: 
  * @Date: 2023-03-11 01:02:44
  * @LastEditors: June
- * @LastEditTime: 2023-03-11 02:46:34
+ * @LastEditTime: 2023-03-12 22:30:52
  */
 import { createApp } from 'vue'
-import router from '@/router/index'
-import store from '@/store/index'
+import router from './router/index'
+import store from './store/index'
 import App from './App.vue'
 import './styles/reset.scss'
 

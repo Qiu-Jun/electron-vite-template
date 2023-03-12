@@ -3,10 +3,10 @@
  * @Description: 
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-03-11 20:37:33
+ * @LastEditTime: 2023-03-12 22:43:43
  */
-import { app, BrowserWindow } from 'electron'
-import path from 'path'
+const { app, BrowserWindow } =  require('electron')
+const path =  require('path')
 
 let win = null
 
@@ -23,15 +23,18 @@ const createWindow = () => {
             webSecurity: false,
             contextIsolation: false,
             nodeIntegration: true,
-            preload: path.join(__dirname, '../preload/index.ts'),
+            preload: path.join(__dirname, '../preload/index.js'),
         },
     });
     // app.isPackaged 如果应用已经打包，返回true ，否则返回false
     if (app.isPackaged) {
-        win.loadFile(path.join(__dirname, `file://${path.join(__dirname, '../../dist/index.html')}`))
+        win.loadFile(path.join(__dirname, `file://${path.join(__dirname, './dist/index.html')}`))
     } else {
-        win.loadURL('http://localhost:5173/')
+        win.loadURL('http://127.0.0.1:5173/')
     }
+    win.on('ready-to-show',() => {
+        win.show()
+    })
 }
 
 app.whenReady().then(()=>{

@@ -2,7 +2,7 @@
     "name": "electron-vite-template",
     "version": "1.0.0",
     "description": "electron-vite-template for June",
-    "main": "dist-electron/index.js",
+    "main": "electron/main/index.js",
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc && vite build",
@@ -14,7 +14,7 @@
         "appId": "com.June.app",
         "productName": "June",
         "files": [
-            "./**/*"
+            "./*"
         ],
         "directories": {
             "output": "release/${version}"
@@ -77,7 +77,6 @@
         "typescript": "^4.9.5",
         "vite": "^4.1.4",
         "vite-plugin-electron": "^0.11.1",
-        "vite-plugin-electron-renderer": "^0.12.1",
         "vite-plugin-html": "^3.2.0",
         "vue-tsc": "^1.2.0"
     }
