@@ -3,12 +3,14 @@
  * @Description: 
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-03-12 22:43:43
+ * @LastEditTime: 2023-03-13 01:06:14
  */
-const { app, BrowserWindow } =  require('electron')
-const path =  require('path')
+import { app, BrowserWindow } from "electron"
+import path from 'path'
+import initTray from './modules/tray/index'
+import createMenu from './modules/menu/index'
 
-let win = null
+let win: any = null
 
 const createWindow = () => {
     win = new BrowserWindow({
@@ -23,7 +25,7 @@ const createWindow = () => {
             webSecurity: false,
             contextIsolation: false,
             nodeIntegration: true,
-            preload: path.join(__dirname, '../preload/index.js'),
+            // preload: path.join(__dirname, "..", "preload")
         },
     });
     // app.isPackaged 如果应用已经打包，返回true ，否则返回false
@@ -32,7 +34,7 @@ const createWindow = () => {
     } else {
         win.loadURL('http://127.0.0.1:5173/')
     }
-    win.on('ready-to-show',() => {
+    win.once('ready-to-show',() => {
         win.show()
     })
 }
@@ -44,6 +46,8 @@ app.whenReady().then(()=>{
         // 尝试在应用程序已运行时或单击应用程序的坞站或任务栏图标时重新激活它
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
+    initTray()
+    createMenu()
 })
 
 // 除了 macOS 外，当所有窗口都被关闭的时候退出程序

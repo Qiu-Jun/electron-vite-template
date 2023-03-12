@@ -8,7 +8,8 @@
         "jsx": "preserve",
         "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"]
+            "@/*": ["src/*"],
+            "~/*": ["types/*"]
         },
         "resolveJsonModule": true,
         "isolatedModules": true,
@@ -18,8 +19,12 @@
         "noEmit": true
     },
     "include": [
+        "src/*/*.ts",
         "src/**/*.ts",
-        "types/**/*.d.ts"
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "types/*.d.ts"
     ],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -13,4 +13,6 @@ declare global {
     interface Window {
         electronAPI: IElectronAPI;
     }
+
+    export default Window
 }
