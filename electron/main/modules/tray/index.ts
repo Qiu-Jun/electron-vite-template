@@ -4,13 +4,13 @@
  * @Author: June
  * @Date: 2023-03-13 00:57:21
  * @LastEditors: June
- * @LastEditTime: 2023-03-13 01:05:28
+ * @LastEditTime: 2023-03-16 20:42:40
  */
 import { app, Menu, Tray,nativeImage } from 'electron'
 import path from 'path'
 
 const initTray = () => {
-    const iconPath = path.join(__dirname, '/icone.ico').replace('/\\/g','\\\\');
+    const iconPath = path.join(__dirname, '..', 'public/icon.ico').replace('/\\/g','\\\\');
     const appIcon = new Tray(nativeImage.createFromPath(iconPath))
     appIcon.setToolTip('Mall-Cook') // 鼠标指针在托盘图标上悬停时显示的文本
     const contextMenu = Menu.buildFromTemplate([

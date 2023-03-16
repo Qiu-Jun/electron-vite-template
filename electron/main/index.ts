@@ -3,7 +3,7 @@
  * @Description: 
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-03-13 01:06:14
+ * @LastEditTime: 2023-03-16 21:36:40
  */
 import { app, BrowserWindow } from "electron"
 import path from 'path'
@@ -24,13 +24,12 @@ const createWindow = () => {
         webPreferences: {
             webSecurity: false,
             contextIsolation: false,
-            nodeIntegration: true,
-            // preload: path.join(__dirname, "..", "preload")
+            nodeIntegration: true
         },
     });
     // app.isPackaged 如果应用已经打包，返回true ，否则返回false
     if (app.isPackaged) {
-        win.loadFile(path.join(__dirname, `file://${path.join(__dirname, './dist/index.html')}`))
+        win.loadFile(`./dist/index.html`)
     } else {
         win.loadURL('http://127.0.0.1:5173/')
     }
@@ -46,6 +45,7 @@ app.whenReady().then(()=>{
         // 尝试在应用程序已运行时或单击应用程序的坞站或任务栏图标时重新激活它
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
+    win.webContents.openDevTools()
     initTray()
     createMenu()
 })
