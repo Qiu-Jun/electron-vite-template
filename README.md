@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-12 22:16:24
  * @LastEditors: June
- * @LastEditTime: 2023-03-13 01:21:36
+ * @LastEditTime: 2023-03-16 21:40:56
 -->
 ## electron-vite-template
 基于vite的electron 空白脚手架, 可以把src换成react，替换掉react对应的库即可
@@ -12,6 +12,8 @@
 ## 目录接受
 + electron 主进程
     + modules 主进程的一些模块
+        - menu 菜单
+        - tray 托盘
     + main
     + preload 预加载
 + public 静态资源
@@ -22,7 +24,8 @@
 - [x] 搭建目录结构
 - [ ] eslist + prettire
 - [ ] commit校验
-- [ ] 打包优化
+- [x] electron目录打包优化
+- [ ] 更新处理
 
 ## 工具库说明
 + kill-port: 清理端口
