@@ -1,14 +1,22 @@
 /*
- * @Descripttion: 
- * @version: 
+ * @Descripttion:
+ * @version:
  * @Author: June
  * @Date: 2023-03-13 01:02:42
  * @LastEditors: June
- * @LastEditTime: 2023-03-13 01:04:58
+ * @LastEditTime: 2023-03-16 22:27:58
  */
 import { app, Menu } from 'electron'
+import handleUpdate from './module/update'
 
-const template: [any] = [
+const template: any = [
+    {
+        label: '窗口',
+        submenu: [
+            { label: '最小化', role: 'minimize' },
+            { label: '退出', role: 'quit ' }
+        ]
+    },
     {
         label: '编辑',
         submenu: [
@@ -19,36 +27,42 @@ const template: [any] = [
             { label: '重做', accelerator: 'Shift+CmdOrCtrl+Z', role: 'redo' },
             { label: '全选', accelerator: 'CmdOrCtrl+A', role: 'selectAll' }
         ]
+    },
+    {
+        label: '帮助',
+        submenu: [{ label: '检查更新', click: handleUpdate }]
     }
 ]
 
 // 设置菜单栏, win表示当前窗口实例
 const createMenu = () => {
-    // darwin表示macOS，这里我们选择对macOS系统的创建应用内菜单 win32 (Windows), linux (Linux) 和 darwin (macOS) 
+    // darwin表示macOS，这里我们选择对macOS系统的创建应用内菜单 win32 (Windows), linux (Linux) 和 darwin (macOS)
     const _platform = process.platform
     const menu = Menu.buildFromTemplate(template)
-    switch(_platform) {
+    switch (_platform) {
         case 'darwin':
             // mac处理
             const name = app.getName()
             template.unshift({
                 label: name,
-                submenu: [{
-                    label: 'Quit ( 退出 )',
-                    accelerator: 'Command+Q',
-                    click: function () {
-                        app.quit()
+                submenu: [
+                    {
+                        label: 'Quit ( 退出 )',
+                        accelerator: 'Command+Q',
+                        click: function () {
+                            app.quit()
+                        }
                     }
-                }]
+                ]
             })
             Menu.setApplicationMenu(menu)
-            break;
+            break
         case 'win32':
             Menu.setApplicationMenu(menu)
-            break;
+            break
         case 'linux':
             Menu.setApplicationMenu(null)
-            break;
+            break
     }
 }
 

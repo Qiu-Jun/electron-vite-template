@@ -1,11 +1,11 @@
 /*
  * @Author: June
- * @Description: 
+ * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
  * @LastEditTime: 2023-03-16 21:36:40
  */
-import { app, BrowserWindow } from "electron"
+import { app, BrowserWindow } from 'electron'
 import path from 'path'
 import initTray from './modules/tray/index'
 import createMenu from './modules/menu/index'
@@ -14,7 +14,7 @@ let win: any = null
 
 const createWindow = () => {
     win = new BrowserWindow({
-        width: 1080, 
+        width: 1080,
         height: 960,
         focusable: true,
         show: false,
@@ -25,20 +25,20 @@ const createWindow = () => {
             webSecurity: false,
             contextIsolation: false,
             nodeIntegration: true
-        },
-    });
+        }
+    })
     // app.isPackaged 如果应用已经打包，返回true ，否则返回false
     if (app.isPackaged) {
         win.loadFile(`./dist/index.html`)
     } else {
         win.loadURL('http://127.0.0.1:5173/')
     }
-    win.once('ready-to-show',() => {
+    win.once('ready-to-show', () => {
         win.show()
     })
 }
 
-app.whenReady().then(()=>{
+app.whenReady().then(() => {
     createWindow()
     app.on('activate', () => {
         // 当应用被激活时发出。 各种操作都可以触发此事件, 例如首次启动应用程序、
@@ -57,16 +57,10 @@ app.on('window-all-closed', () => {
 })
 
 // 客户端聚焦
-app.on('browser-window-focus',()=>{
-    
-})
+app.on('browser-window-focus', () => {})
 
 // 客户端失去焦点
-app.on('browser-window-blur',()=>{
-    
-})
+app.on('browser-window-blur', () => {})
 
 // 当所有窗口被关闭后触发，同时应用程序将退出
-app.on('will-quit', () => {
-   
-})
+app.on('will-quit', () => {})
