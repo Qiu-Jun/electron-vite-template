@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-12 22:16:24
  * @LastEditors: June
- * @LastEditTime: 2023-03-16 21:40:56
+ * @LastEditTime: 2023-03-17 00:28:51
 -->
 
 ## electron-vite-template
@@ -27,8 +27,8 @@
 ## TODO
 
 -   [x] 搭建目录结构
--   [ ] eslist + prettire
--   [ ] commit 校验
+-   [x] eslist + prettire
+-   [x] commit 校验
 -   [x] electron 目录打包优化
 -   [ ] 更新处理
 

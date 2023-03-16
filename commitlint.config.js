@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-17 00:13:46
  * @LastEditors: June
- * @LastEditTime: 2023-03-17 00:20:42
+ * @LastEditTime: 2023-03-17 00:31:04
  */
 module.exports = {
     extents: ['@commitlint/config-conventional', 'cz'],
