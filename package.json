@@ -4,7 +4,8 @@
     "description": "electron-vite-template for June",
     "main": "dist-electron/index.js",
     "scripts": {
-        "dev": "chcp 65001 && vite",
+        "dev": "chcp 65001 && vite --mode develectron",
+        "devweb": "chcp 65001 && vite --mode devweb",
         "build": "vue-tsc && vite build",
         "build:all": "rimraf dist-electron && npm run build && electron-builder --mac --windows",
         "build:mac": "rimraf dist-electron && npm run build && electron-builder --mac",
