@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-04-01 17:53:11
+ * @LastEditTime: 2023-04-01 18:04:49
  */
 import { app, BrowserWindow } from 'electron'
 import path from 'path'
@@ -21,7 +21,6 @@ const createWindow = () => {
         frame: true,
         resizable: true,
         fullscreenable: true,
-        skipTaskbar: true, // 窗口是否不显示在任务栏上面
         // alwaysOnTop: true, // 窗口置顶
         transparent: true, // 窗口透明
         webPreferences: {
