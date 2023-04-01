@@ -2,7 +2,7 @@
     "name": "electron-vite-template",
     "version": "1.0.1",
     "description": "electron-vite-template for June",
-    "main": "dist-electron/index.js",
+    "main": "dist-electron/main/index.js",
     "scripts": {
         "dev": "chcp 65001 && vite --mode develectron",
         "devweb": "chcp 65001 && vite --mode devweb",

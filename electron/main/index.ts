@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-03-16 21:36:40
+ * @LastEditTime: 2023-04-01 17:53:11
  */
 import { app, BrowserWindow } from 'electron'
 import path from 'path'
@@ -21,10 +21,14 @@ const createWindow = () => {
         frame: true,
         resizable: true,
         fullscreenable: true,
+        skipTaskbar: true, // 窗口是否不显示在任务栏上面
+        // alwaysOnTop: true, // 窗口置顶
+        transparent: true, // 窗口透明
         webPreferences: {
             webSecurity: false,
             contextIsolation: false,
-            nodeIntegration: true
+            nodeIntegration: true,
+            preload: path.join(__dirname, '..', 'preload/index.js')
         }
     })
     // app.isPackaged 如果应用已经打包，返回true ，否则返回false
@@ -46,7 +50,7 @@ app.whenReady().then(() => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
     win.webContents.openDevTools()
-    initTray()
+    initTray(win)
     createMenu()
 })
 
@@ -57,10 +61,10 @@ app.on('window-all-closed', () => {
 })
 
 // 客户端聚焦
-app.on('browser-window-focus', () => {})
+// app.on('browser-window-focus', () => { })
 
-// 客户端失去焦点
-app.on('browser-window-blur', () => {})
+// // 客户端失去焦点
+// app.on('browser-window-blur', () => { })
 
-// 当所有窗口被关闭后触发，同时应用程序将退出
-app.on('will-quit', () => {})
+// // 当所有窗口被关闭后触发，同时应用程序将退出
+// app.on('will-quit', () => { })
