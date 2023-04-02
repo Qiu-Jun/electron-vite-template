@@ -1,4 +1,13 @@
-import { ipcRenderer } from 'electron'
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: June
+ * @Date: 2023-03-25 15:50:30
+ * @LastEditors: June
+ * @LastEditTime: 2023-04-02 14:58:31
+ */
+import { ipcRenderer, contextBridge } from 'electron'
+import os from 'os'
 
 // 对应下面的 win.webContents.send("show");
 // 默认有个 event 事件参数
@@ -11,4 +20,9 @@ ipcRenderer.on('show', (e) => {
 ipcRenderer.on('hide', (e, s: number) => {
     const root = document.querySelector('#app') as HTMLElement
     root.style.animation = `hide ${s}s linear forwards`
+})
+
+// 注册上下文隔离接口
+contextBridge.exposeInMainWorld('electronAPI', {
+    platform: os.platform()
 })

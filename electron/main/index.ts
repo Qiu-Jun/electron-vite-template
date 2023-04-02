@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-04-01 18:04:49
+ * @LastEditTime: 2023-04-02 15:12:15
  */
 import { app, BrowserWindow } from 'electron'
 import path from 'path'
@@ -13,6 +13,7 @@ import createMenu from './modules/menu/index'
 let win: any = null
 
 const createWindow = () => {
+    console.log(path.join(__dirname, '..', 'preload/index.js'))
     win = new BrowserWindow({
         width: 1080,
         height: 960,
@@ -25,7 +26,7 @@ const createWindow = () => {
         transparent: true, // 窗口透明
         webPreferences: {
             webSecurity: false,
-            contextIsolation: false,
+            contextIsolation: true, // 开启上下文隔离
             nodeIntegration: true,
             preload: path.join(__dirname, '..', 'preload/index.js')
         }

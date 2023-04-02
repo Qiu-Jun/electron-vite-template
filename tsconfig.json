@@ -8,8 +8,7 @@
         "jsx": "preserve",
         "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"],
-            "~/*": ["types/*"]
+            "@/*": ["src/*"]
         },
         "resolveJsonModule": true,
         "isolatedModules": true,
