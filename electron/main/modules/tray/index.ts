@@ -4,10 +4,12 @@
  * @Author: June
  * @Date: 2023-03-13 00:57:21
  * @LastEditors: June
- * @LastEditTime: 2023-05-04 12:45:01
+ * @LastEditTime: 2023-05-05 00:52:03
  */
-import { app, Menu, Tray, nativeImage } from 'electron'
+import { app, Menu, Tray, nativeImage, dialog } from 'electron'
 import path from 'path'
+import pkg from '../../../../package.json'
+import { createWin } from '../utils/win'
 
 const initTray = (win: any) => {
     const iconPath = path.join(__dirname, '../..', 'public/icon.ico').replace('/\\/g', '\\\\')
@@ -15,14 +17,32 @@ const initTray = (win: any) => {
     tray.setToolTip('Mall-Cook') // 鼠标指针在托盘图标上悬停时显示的文本
     const contextMenu = Menu.buildFromTemplate([
         {
+            label: '关于',
+            click: () => {
+                const options = {
+                    type: 'info',
+                    title: `关于`,
+                    message: `关于${pkg.name}\n当前版本 ${pkg.version}`,
+                    buttons: []
+                }
+                dialog.showMessageBox(options)
+            }
+        },
+        {
+            label: '仓库地址',
+            click: () => {
+                createWin({
+                    ops: {},
+                    url: 'https://github.com/Qiu-Jun/electron-vite-template'
+                })
+            }
+        },
+        {
             label: '退出',
-            type: 'radio',
             click: () => {
                 app.quit()
-            },
-            checked: true
-        },
-        { label: '测试占位', type: 'radio' }
+            }
+        }
     ])
 
     // Call this again for Linux because we modified the context menu

@@ -3,17 +3,17 @@
  * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-05-04 12:48:56
+ * @LastEditTime: 2023-05-05 00:52:57
  */
 import { app, BrowserWindow } from 'electron'
 import path from 'path'
 import initTray from './modules/tray/index'
 import createMenu from './modules/menu/index'
-
+import { defaultWinOps } from './modules/utils/win'
 let win: any = null
 
 const createWindow = () => {
-    win = new BrowserWindow({
+    const winOps = Object.assign(defaultWinOps, {
         width: 1080,
         height: 960,
         focusable: true,
@@ -30,6 +30,7 @@ const createWindow = () => {
             preload: path.join(__dirname, '..', 'preload/index.js')
         }
     })
+    win = new BrowserWindow(winOps)
     // app.isPackaged 如果应用已经打包，返回true ，否则返回false
     if (app.isPackaged) {
         win.loadFile(`./dist/index.html`)
@@ -38,6 +39,9 @@ const createWindow = () => {
     }
     win.once('ready-to-show', () => {
         win.show()
+    })
+    win.on('closed', () => {
+        win = null
     })
 }
 
