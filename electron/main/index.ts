@@ -3,13 +3,13 @@
  * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-05-05 00:52:57
+ * @LastEditTime: 2023-05-05 01:01:14
  */
 import { app, BrowserWindow } from 'electron'
 import path from 'path'
 import initTray from './modules/tray/index'
 import createMenu from './modules/menu/index'
-import { defaultWinOps } from './modules/utils/win'
+import { defaultWinOps } from './utils/win'
 let win: any = null
 
 const createWindow = () => {

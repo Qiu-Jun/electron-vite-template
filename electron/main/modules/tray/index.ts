@@ -4,12 +4,12 @@
  * @Author: June
  * @Date: 2023-03-13 00:57:21
  * @LastEditors: June
- * @LastEditTime: 2023-05-05 00:52:03
+ * @LastEditTime: 2023-05-05 01:00:28
  */
 import { app, Menu, Tray, nativeImage, dialog } from 'electron'
 import path from 'path'
 import pkg from '../../../../package.json'
-import { createWin } from '../utils/win'
+import { createWin } from '../../utils/win'
 
 const initTray = (win: any) => {
     const iconPath = path.join(__dirname, '../..', 'public/icon.ico').replace('/\\/g', '\\\\')

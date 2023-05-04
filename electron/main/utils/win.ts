@@ -4,10 +4,10 @@
  * @Author: June
  * @Date: 2023-05-04 14:26:20
  * @LastEditors: June
- * @LastEditTime: 2023-05-05 00:51:11
+ * @LastEditTime: 2023-05-05 01:00:33
  */
 import { BrowserWindow, dialog } from 'electron'
-import pkg from '../../../../package.json'
+import pkg from '../../../package.json'
 
 interface Iparams {
     ops: any
