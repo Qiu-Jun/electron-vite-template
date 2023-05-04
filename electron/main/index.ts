@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-04-02 15:12:15
+ * @LastEditTime: 2023-05-04 12:48:56
  */
 import { app, BrowserWindow } from 'electron'
 import path from 'path'
@@ -13,7 +13,6 @@ import createMenu from './modules/menu/index'
 let win: any = null
 
 const createWindow = () => {
-    console.log(path.join(__dirname, '..', 'preload/index.js'))
     win = new BrowserWindow({
         width: 1080,
         height: 960,
