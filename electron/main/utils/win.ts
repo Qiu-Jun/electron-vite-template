@@ -4,9 +4,10 @@
  * @Author: June
  * @Date: 2023-05-04 14:26:20
  * @LastEditors: June
- * @LastEditTime: 2023-05-05 01:00:33
+ * @LastEditTime: 2023-05-06 01:22:15
  */
 import { BrowserWindow, dialog } from 'electron'
+import path from 'path'
 import pkg from '../../../package.json'
 
 interface Iparams {
@@ -26,9 +27,10 @@ export const defaultWinOps = {
     // alwaysOnTop: true, // 窗口置顶
     transparent: true, // 窗口透明
     webPreferences: {
-        webSecurity: false,
+        webSecurity: true,
         contextIsolation: true, // 开启上下文隔离
-        nodeIntegration: true
+        nodeIntegration: true,
+        preload: path.join(__dirname, '..', 'preload/index.js')
     }
 }
 

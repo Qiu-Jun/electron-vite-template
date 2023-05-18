@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-13 00:57:21
  * @LastEditors: June
- * @LastEditTime: 2023-05-05 01:00:28
+ * @LastEditTime: 2023-05-18 17:55:17
  */
 import { app, Menu, Tray, nativeImage, dialog } from 'electron'
 import path from 'path'
@@ -36,6 +36,29 @@ const initTray = (win: any) => {
                     url: 'https://github.com/Qiu-Jun/electron-vite-template'
                 })
             }
+        },
+        {
+            label: '设置',
+            submenu: [
+                {
+                    label: '开机自启',
+                    type: 'checkbox',
+                    checked: app.getLoginItemSettings().openAtLogin,
+                    click: function () {
+                        const curStatus = app.getLoginItemSettings().openAtLogin
+                        if (!app.isPackaged) {
+                            app.setLoginItemSettings({
+                                openAtLogin: !curStatus,
+                                path: process.execPath
+                            })
+                        } else {
+                            app.setLoginItemSettings({
+                                openAtLogin: !curStatus
+                            })
+                        }
+                    }
+                }
+            ]
         },
         {
             label: '退出',

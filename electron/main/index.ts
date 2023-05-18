@@ -3,46 +3,24 @@
  * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-05-05 01:01:14
+ * @LastEditTime: 2023-05-06 01:21:41
  */
 import { app, BrowserWindow } from 'electron'
-import path from 'path'
 import initTray from './modules/tray/index'
 import createMenu from './modules/menu/index'
-import { defaultWinOps } from './utils/win'
+import { createWin } from './utils/win'
+import handleUpdate from './utils/update'
 let win: any = null
 
 const createWindow = () => {
-    const winOps = Object.assign(defaultWinOps, {
-        width: 1080,
-        height: 960,
-        focusable: true,
-        show: false,
-        frame: true,
-        resizable: true,
-        fullscreenable: true,
-        // alwaysOnTop: true, // 窗口置顶
-        transparent: true, // 窗口透明
-        webPreferences: {
-            webSecurity: false,
-            contextIsolation: true, // 开启上下文隔离
-            nodeIntegration: true,
-            preload: path.join(__dirname, '..', 'preload/index.js')
-        }
-    })
-    win = new BrowserWindow(winOps)
     // app.isPackaged 如果应用已经打包，返回true ，否则返回false
-    if (app.isPackaged) {
-        win.loadFile(`./dist/index.html`)
-    } else {
-        win.loadURL('http://127.0.0.1:5173/')
-    }
-    win.once('ready-to-show', () => {
-        win.show()
+    const isPackaged: boolean = app.isPackaged
+    win = createWin({
+        ops: {},
+        file: isPackaged ? './dist/index.html' : '',
+        url: isPackaged ? '' : 'http://127.0.0.1:5173/'
     })
-    win.on('closed', () => {
-        win = null
-    })
+    handleUpdate(win)
 }
 
 app.whenReady().then(() => {
@@ -52,7 +30,7 @@ app.whenReady().then(() => {
         // 尝试在应用程序已运行时或单击应用程序的坞站或任务栏图标时重新激活它
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
-    win.webContents.openDevTools()
+    !app.isPackaged && win.webContents.openDevTools()
     initTray(win)
     createMenu()
 })
