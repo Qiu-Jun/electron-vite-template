@@ -33,14 +33,14 @@
             "output": "release/${version}"
         },
         "mac": {
-            "icon": "./public/icon.ico",
+            "icon": "./public/icon.png",
             "artifactName": "${productName}_${version}.${ext}",
             "target": [
                 "dmg"
             ]
         },
         "win": {
-            "icon": "./public/icon.ico",
+            "icon": "./public/icon.png",
             "artifactName": "${productName}_${version}.${ext}",
             "target": [
                 {

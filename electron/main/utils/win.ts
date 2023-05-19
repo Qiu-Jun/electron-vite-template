@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-05-04 14:26:20
  * @LastEditors: June
- * @LastEditTime: 2023-05-06 01:22:15
+ * @LastEditTime: 2023-05-19 14:52:14
  */
 import { BrowserWindow, dialog } from 'electron'
 import path from 'path'
@@ -24,6 +24,7 @@ export const defaultWinOps = {
     frame: true,
     resizable: true,
     fullscreenable: true,
+    icon: path.join(__dirname, '../..', 'public/icon.png'),
     // alwaysOnTop: true, // 窗口置顶
     transparent: true, // 窗口透明
     webPreferences: {
