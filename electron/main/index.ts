@@ -3,13 +3,13 @@
  * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-05-19 02:51:37
+ * @LastEditTime: 2023-05-22 09:28:58
  */
 import { app, BrowserWindow } from 'electron'
 import initTray from './modules/tray/index'
 import createMenu from './modules/menu/index'
 import { createWin } from './utils/win'
-// import handleUpdate from './utils/update'
+import handleUpdate from './utils/update'
 let win: any = null
 
 const createWindow = () => {
@@ -20,7 +20,7 @@ const createWindow = () => {
         file: isPackaged ? './dist/index.html' : '',
         url: isPackaged ? '' : 'http://127.0.0.1:5173/'
     })
-    // handleUpdate(win)
+    handleUpdate(win)
 }
 
 app.whenReady().then(() => {

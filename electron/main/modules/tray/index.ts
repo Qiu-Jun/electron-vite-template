@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-13 00:57:21
  * @LastEditors: June
- * @LastEditTime: 2023-05-19 14:48:23
+ * @LastEditTime: 2023-05-22 13:43:39
  */
 import { app, Menu, Tray, nativeImage, dialog, BrowserWindow } from 'electron'
 import path from 'path'
@@ -46,14 +46,22 @@ const initTray = (win: any) => {
                     checked: app.getLoginItemSettings().openAtLogin,
                     click: function () {
                         const curStatus = app.getLoginItemSettings().openAtLogin
-                        if (!app.isPackaged) {
+                        if (process.platform === 'darwin') {
                             app.setLoginItemSettings({
                                 openAtLogin: !curStatus,
-                                path: process.execPath
+                                path: process.execPath,
+                                openAsHidden: true //  用户可以从系统首选项中编辑此设置, 以便在打开应用程序时检查
+                            })
+                        } else if (process.platform === 'win32') {
+                            app.setLoginItemSettings({
+                                openAtLogin: !curStatus,
+                                path: process.execPath,
+                                args: ['--openAsHidden']
                             })
                         } else {
                             app.setLoginItemSettings({
-                                openAtLogin: !curStatus
+                                openAtLogin: !curStatus,
+                                path: process.execPath
                             })
                         }
                     }
@@ -86,10 +94,13 @@ const initTray = (win: any) => {
                 win.webContents.send('hide', s)
 
                 // 退出动画加载完之后再隐藏程序
-                let timer: any = setTimeout(() => {
+                let timer: NodeJS.Timeout | null = null
+                timer = setTimeout(() => {
                     win.hide()
-                    clearTimeout(timer)
-                    timer = null
+                    if (timer) {
+                        clearTimeout(timer)
+                        timer = null
+                    }
                 }, s * 1000)
             }
         })

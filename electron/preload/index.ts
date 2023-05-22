@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-25 15:50:30
  * @LastEditors: June
- * @LastEditTime: 2023-04-02 14:58:31
+ * @LastEditTime: 2023-05-22 10:09:34
  */
 import { ipcRenderer, contextBridge } from 'electron'
 import os from 'os'
@@ -24,5 +24,6 @@ ipcRenderer.on('hide', (e, s: number) => {
 
 // 注册上下文隔离接口
 contextBridge.exposeInMainWorld('electronAPI', {
-    platform: os.platform()
+    platform: os.platform(),
+    ipcRenderer
 })
