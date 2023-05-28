@@ -83,7 +83,9 @@
         }
     },
     "dependencies": {
+        "lodash-es": "^4.17.21",
         "pinia": "^2.0.33",
+        "uuid": "^9.0.0",
         "vue": "^3.2.47",
         "vue-router": "^4.1.6"
     },

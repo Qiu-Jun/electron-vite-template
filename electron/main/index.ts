@@ -3,24 +3,33 @@
  * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-05-22 09:28:58
+ * @LastEditTime: 2023-05-28 12:50:19
  */
 import { app, BrowserWindow } from 'electron'
 import initTray from './modules/tray/index'
 import createMenu from './modules/menu/index'
-import { createWin } from './utils/win'
+import WindowManage from './utils/win'
+import createUpdateWindow from './modules/customWin/update'
 import handleUpdate from './utils/update'
+import { appMain } from './config/constants/winNames'
+type winModule = {
+    id: string | number
+    url: string
+}
+
+// key为winid, value   为窗口创建返回对象
+global.BrowserWindowsMap = new Map<string | number, BrowserWindow>()
+// key为窗口模块名称， 方便通过模块名查询
+global.winModulesMap = new Map<string | number, winModule>()
+
 let win: any = null
 
 const createWindow = () => {
     // app.isPackaged 如果应用已经打包，返回true ，否则返回false
-    const isPackaged: boolean = app.isPackaged
-    win = createWin({
-        ops: {},
-        file: isPackaged ? './dist/index.html' : '',
-        url: isPackaged ? '' : 'http://127.0.0.1:5173/'
+    // const isPackaged: boolean = app.isPackaged
+    win = WindowManage.getInstance().createWin({
+        module: appMain
     })
-    handleUpdate(win)
 }
 
 app.whenReady().then(() => {
@@ -31,6 +40,8 @@ app.whenReady().then(() => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
     !app.isPackaged && win.webContents.openDevTools()
+    const updateWin = createUpdateWindow()
+    handleUpdate(updateWin)
     initTray(win)
     createMenu()
 })

@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-05-19 02:50:49
  * @LastEditors: June
- * @LastEditTime: 2023-05-22 12:09:07
+ * @LastEditTime: 2023-05-22 14:34:15
 -->
 <template>
     <div class="update-wrap">
@@ -30,7 +30,7 @@ const handleUpdate = () => {
 }
 
 onMounted(() => {
-    window.electronAPI.ipcRenderer.on('message', (type, text) => {
+    window.electronAPI.ipcRenderer.on('updatemessage', (type, text) => {
         console.log(type, text)
     })
 })

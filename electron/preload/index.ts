@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-03-25 15:50:30
  * @LastEditors: June
- * @LastEditTime: 2023-05-22 10:09:34
+ * @LastEditTime: 2023-05-22 14:31:33
  */
 import { ipcRenderer, contextBridge } from 'electron'
 import os from 'os'
@@ -26,4 +26,8 @@ ipcRenderer.on('hide', (e, s: number) => {
 contextBridge.exposeInMainWorld('electronAPI', {
     platform: os.platform(),
     ipcRenderer
+})
+
+ipcRenderer.on('updatemessage', (type, text) => {
+    console.log(type, text)
 })
