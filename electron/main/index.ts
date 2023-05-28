@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-05-28 12:50:19
+ * @LastEditTime: 2023-05-28 13:43:36
  */
 import { app, BrowserWindow } from 'electron'
 import initTray from './modules/tray/index'
@@ -41,9 +41,9 @@ app.whenReady().then(() => {
     })
     !app.isPackaged && win.webContents.openDevTools()
     const updateWin = createUpdateWindow()
-    handleUpdate(updateWin)
     initTray(win)
     createMenu()
+    // handleUpdate(updateWin)
 })
 
 // 除了 macOS 外，当所有窗口都被关闭的时候退出程序
