@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-05-28 13:43:36
+ * @LastEditTime: 2023-05-30 21:43:51
  */
 import { app, BrowserWindow } from 'electron'
 import initTray from './modules/tray/index'
@@ -12,6 +12,7 @@ import WindowManage from './utils/win'
 import createUpdateWindow from './modules/customWin/update'
 import handleUpdate from './utils/update'
 import { appMain } from './config/constants/winNames'
+import path from 'path'
 type winModule = {
     id: string | number
     url: string
@@ -30,6 +31,7 @@ const createWindow = () => {
     win = WindowManage.getInstance().createWin({
         module: appMain
     })
+    // const LOAD_URL = `file://${path.join(__dirname, '../../dist/index.html')}`
 }
 
 app.whenReady().then(() => {
@@ -40,7 +42,7 @@ app.whenReady().then(() => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
     !app.isPackaged && win.webContents.openDevTools()
-    const updateWin = createUpdateWindow()
+    // const updateWin = createUpdateWindow()
     initTray(win)
     createMenu()
     // handleUpdate(updateWin)

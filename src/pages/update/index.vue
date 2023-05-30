@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-05-19 02:50:49
  * @LastEditors: June
- * @LastEditTime: 2023-05-22 14:34:15
+ * @LastEditTime: 2023-05-30 21:29:52
 -->
 <template>
     <div class="update-wrap">
@@ -18,7 +18,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 const handleNotUpdate = () => {
     window.electronAPI.ipcRenderer.send('updateHide')
@@ -30,7 +30,7 @@ const handleUpdate = () => {
 }
 
 onMounted(() => {
-    window.electronAPI.ipcRenderer.on('updatemessage', (type, text) => {
+    window.electronAPI.ipcRenderer.on('updatemessage', (type: string, text: string) => {
         console.log(type, text)
     })
 })

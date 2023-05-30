@@ -4,7 +4,7 @@
  * @Author: June
  * @Date: 2023-05-04 14:26:20
  * @LastEditors: June
- * @LastEditTime: 2023-05-28 13:32:04
+ * @LastEditTime: 2023-05-30 21:43:28
  */
 import { app, BrowserWindow, dialog, shell, MenuItem } from 'electron'
 import path from 'path'
@@ -101,7 +101,6 @@ class WindowManage {
             })
             this.delWin(mainWindow.id)
         })
-
         //开发模式下拼接打开路由
         if (!app.isPackaged) {
             const openUrl = options.toUrl
@@ -110,7 +109,7 @@ class WindowManage {
             mainWindow.loadURL(openUrl)
         } else {
             //打包后读取文件，并使用哈希打开指定路由
-            mainWindow.loadFile(path.join(__dirname, './dist/index.html'), {
+            mainWindow.loadFile(path.join(__dirname, '../../dist/index.html'), {
                 hash: options.urlhash || '/'
             })
         }
