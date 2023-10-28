@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2023-03-11 00:47:21
  * @LastEditors: June
- * @LastEditTime: 2023-05-30 21:43:51
+ * @LastEditTime: 2023-10-28 21:26:50
  */
 import { app, BrowserWindow } from 'electron'
 import initTray from './modules/tray/index'
@@ -24,7 +24,7 @@ global.BrowserWindowsMap = new Map<string | number, BrowserWindow>()
 global.winModulesMap = new Map<string | number, winModule>()
 
 let win: any = null
-
+let willQuitApp = false
 const createWindow = () => {
     // app.isPackaged 如果应用已经打包，返回true ，否则返回false
     // const isPackaged: boolean = app.isPackaged
@@ -40,6 +40,14 @@ app.whenReady().then(() => {
         // 当应用被激活时发出。 各种操作都可以触发此事件, 例如首次启动应用程序、
         // 尝试在应用程序已运行时或单击应用程序的坞站或任务栏图标时重新激活它
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    })
+    win.on('close', (e) => {
+        if (willQuitApp) {
+            win = null
+        } else {
+            e.preventDefault()
+            win.hide()
+        }
     })
     !app.isPackaged && win.webContents.openDevTools()
     // const updateWin = createUpdateWindow()
@@ -59,6 +67,6 @@ app.on('window-all-closed', () => {
 
 // // 客户端失去焦点
 // app.on('browser-window-blur', () => { })
+app.on('activate', () => win.show())
 
-// // 当所有窗口被关闭后触发，同时应用程序将退出
-// app.on('will-quit', () => { })
+app.on('before-quit', () => (willQuitApp = true))
